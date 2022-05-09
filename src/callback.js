@@ -1,5 +1,6 @@
 import * as React from 'react'
-
+import callbackHandler from './callbackHandler.png'
+import callbackHandler2 from './callbackHandler2.png'
 const App = () => {
     const stories = [
         {
@@ -19,9 +20,9 @@ const App = () => {
             objectID: 1,
         },
     ]
-    //- A
+    //+ A
     const handleSearch = (event) => {
-        //- D
+        //+ D
         console.log(event.target.value)
     }
 
@@ -29,16 +30,20 @@ const App = () => {
         <div>
             <h1>My Hacker Stories</h1>
 
-            {/* //- B */}
+            {/* //+ B */}
             <Search onSearch={handleSearch} />
 
             <hr />
-
+            {/*//- ℹ️ has state "stories" */}
             <List list={stories} />
+            <hr />
+            <img src={callbackHandler} alt='1'></img>
+            <hr />
+            <img src={callbackHandler2} alt='2'></img>
+            <hr />
         </div>
     )
 }
-
 
 /*
 /* ---------------  Search  -----------------
@@ -49,19 +54,18 @@ const Search = (props) => {
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value)
-        //- C
+
+        //+ C
         props.onSearch(event)
     }
-
     return (
         <div>
             <label htmlFor='search'>Search: </label>
-            <input
-                id='search'
-                type='text'
-                onChange={props.onSearch}
-            />
-            <p> Searching for {searchTerm}</p>
+            <input id='search' type='text' onChange={handleChange} />
+
+            <p>
+                Searching for <strong>{searchTerm}</strong>.
+            </p>
         </div>
     )
 }
@@ -69,7 +73,7 @@ const Search = (props) => {
 /*
 /* ----------------  List  ------------------
 */
-
+//- ℹ️ receives props: "list"
 const List = ({ list }) => (
     <ul>
         {list.map((item) => (
@@ -78,6 +82,7 @@ const List = ({ list }) => (
     </ul>
 )
 
+//- ℹ️ receives props: "item"
 const Item = ({ item }) => (
     <li>
         <span>
@@ -86,7 +91,7 @@ const Item = ({ item }) => (
         <span>{item.author}</span>
         <span>{item.num_comments}</span>
         <span>{item.points}</span>
-    </li>
+   </li>
 )
 
 export default App
